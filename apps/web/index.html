@@ -5,27 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sign in | Workspace</title>
   <style>
-    :root { --ink:#1e2a5e; --accent:#d98e3e; --paper:#f7f5f0; --muted:#6e7690; --line:#e3dfd3; }
+    :root { --ink:#173b72; --ink-deep:#102d5a; --accent:#8fc9f4; --paper:#f5f8fc; --muted:#68768c; --line:#dce5ef; }
     * { box-sizing:border-box; margin:0; padding:0; }
     body { min-width:320px; min-height:100vh; background:var(--paper); color:#2a2a28; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
     button,input { font:inherit; }
     .page { min-height:100vh; display:grid; grid-template-columns:1.05fr 1fr; overflow:hidden; }
     .brand-side { position:relative; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; padding:40px clamp(28px,5vw,64px); color:var(--paper); background:var(--ink); }
-    .brand-side:before,.brand-side:after { content:""; position:absolute; border:.5px solid rgba(217,142,62,.18); border-radius:50%; pointer-events:none; }
+    .brand-side:before,.brand-side:after { content:""; position:absolute; border:.5px solid rgba(143,201,244,.24); border-radius:50%; pointer-events:none; }
     .brand-side:before { width:420px; height:420px; right:-180px; top:-120px; }
     .brand-side:after { width:280px; height:280px; right:-100px; top:-40px; }
     .brand-top,.lifecycle-row,.brand-bottom { position:relative; z-index:1; }
     .mark { display:flex; align-items:center; gap:10px; margin-bottom:48px; }
-    .mark-glyph { display:grid; place-items:center; width:32px; height:32px; border-radius:8px; color:var(--ink); background:var(--accent); font-weight:900; }
+    .mark-glyph { display:grid; place-items:center; width:32px; height:32px; border-radius:8px; color:var(--ink-deep); background:var(--accent); font-weight:900; }
     .mark-text { font-size:19px; letter-spacing:.01em; }
     .brand-h { max-width:380px; margin-bottom:14px; font-size:clamp(28px,3vw,40px); line-height:1.2; letter-spacing:-.04em; }
     .brand-h em { color:var(--accent); font-style:normal; }
-    .brand-s { max-width:360px; color:#aeb6d6; font-size:14px; line-height:1.6; }
+    .brand-s { max-width:360px; color:#c1d5ed; font-size:14px; line-height:1.6; }
     .lifecycle-row { display:flex; align-items:center; gap:0; margin-top:40px; }
     .lc-node { display:flex; flex:1; flex-direction:column; align-items:center; gap:7px; }
-    .lc-dot { display:grid; place-items:center; width:30px; height:30px; border:1px solid rgba(217,142,62,.4); border-radius:50%; color:var(--accent); background:rgba(217,142,62,.15); font-size:12px; font-weight:800; }
-    .lc-label,.stat-lbl { color:#8d96b8; font-size:10px; text-align:center; }
-    .lc-line { flex:.6; height:.5px; margin-bottom:22px; background:rgba(217,142,62,.3); }
+    .lc-dot { display:grid; place-items:center; width:30px; height:30px; border:1px solid rgba(143,201,244,.5); border-radius:50%; color:var(--accent); background:rgba(143,201,244,.16); font-size:12px; font-weight:800; }
+    .lc-label,.stat-lbl { color:#9eb9dc; font-size:10px; text-align:center; }
+    .lc-line { flex:.6; height:.5px; margin-bottom:22px; background:rgba(143,201,244,.35); }
     .brand-bottom { display:flex; gap:28px; padding-top:20px; border-top:.5px solid rgba(255,255,255,.1); }
     .stat { display:flex; flex-direction:column; gap:2px; }
     .stat-num { font-size:20px; }
@@ -36,25 +36,25 @@
     .pair-tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:24px; }
     .ptab,.role-btn { border:1px solid var(--line); color:#5a6478; background:transparent; cursor:pointer; }
     .ptab { display:flex; align-items:center; gap:6px; padding:7px 11px; border-radius:7px; font-size:12px; }
-    .ptab.sel { border-color:var(--ink); color:var(--paper); background:var(--ink); }
+    .ptab.sel { border-color:var(--ink); color:#fff; background:var(--ink); }
     .role-row { display:flex; gap:5px; margin-bottom:24px; padding:4px; border-radius:9px; background:var(--paper); }
     .role-btn { flex:1; padding:8px 4px; border:0; border-radius:7px; font-size:12px; }
     .role-btn.on { color:var(--ink); background:#fff; box-shadow:0 0 0 .5px var(--line); font-weight:650; }
     .field { margin-bottom:14px; }
     .field label,.chk { color:#5a6478; font-size:12px; }
     .field label { display:flex; justify-content:space-between; margin-bottom:6px; }
-    .field input { width:100%; height:40px; padding:0 12px; border:1px solid #dad5c7; border-radius:8px; outline:0; color:#2a2a28; background:#fbfaf6; font-size:13px; }
+    .field input { width:100%; height:40px; padding:0 12px; border:1px solid #d6e1ed; border-radius:8px; outline:0; color:#2a2a28; background:#f9fbfd; font-size:13px; }
     .field input:focus { border-color:var(--ink); box-shadow:0 0 0 1px var(--ink); }
     .row-between { display:flex; align-items:center; justify-content:space-between; margin:2px 0 18px; }
     .chk { display:flex; align-items:center; gap:6px; }
     .link,.foot a { color:var(--ink); text-decoration:none; cursor:pointer; }
     .link { font-size:12px; }
-    .btn-primary { width:100%; height:42px; margin-bottom:12px; border:0; border-radius:8px; color:var(--paper); background:var(--ink); cursor:pointer; font-size:13px; font-weight:650; }
-    .btn-primary:hover { background:#16204a; }
+    .btn-primary { width:100%; height:42px; margin-bottom:12px; border:0; border-radius:8px; color:#fff; background:var(--ink); cursor:pointer; font-size:13px; font-weight:650; }
+    .btn-primary:hover { background:var(--ink-deep); }
     .sso-row { display:flex; align-items:center; gap:10px; margin:14px 0; }
     .sso-line { flex:1; height:.5px; background:var(--line); }
     .sso-label,.foot { color:#9a9484; font-size:11px; }
-    .btn-sso { width:100%; height:37px; border:1px solid #dad5c7; border-radius:8px; color:#5a6478; background:transparent; cursor:pointer; font-size:12px; }
+    .btn-sso { width:100%; height:37px; border:1px solid #d6e1ed; border-radius:8px; color:#5a6478; background:transparent; cursor:pointer; font-size:12px; }
     .foot { margin-top:20px; text-align:center; }
     #message { min-height:18px; margin-top:10px; color:#a63c2d; font-size:12px; text-align:center; }
     @media (max-width:640px) { .page { grid-template-columns:1fr; } .brand-side { display:none; } .form-side { min-height:100vh; padding:28px 22px; } }
