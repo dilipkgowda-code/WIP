@@ -1,0 +1,12 @@
+{
+  "name": "workforce-intelligence-platform",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node apps/api/src/server.js",
+    "test": "node --test apps/api/test/*.test.js"
+  }
+}
